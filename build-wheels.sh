@@ -5,6 +5,7 @@ cd $(dirname $0)
 
 curl -fsS -o install-poetry.py https://raw.githubusercontent.com/sdispater/poetry/master/install-poetry.py
 #rm get-poetry.py
+export OLD_PATH=$PATH
 
 for PYBIN in /opt/python/cp3*/bin; do
   if [ "$PYBIN" == "/opt/python/cp34-cp34m/bin" ]; then
@@ -14,7 +15,7 @@ for PYBIN in /opt/python/cp3*/bin; do
     continue
   fi
   rm -rf build
-  export PATH=${PYBIN}:$PATH
+  export PATH=${PYBIN}:$OLD_PATH
   ${PYBIN}/python install-poetry.py --preview -y
   export PATH=/root/.local/bin:$PATH
   poetry build -vvv
