@@ -23,9 +23,11 @@ setup: setup-python
 test:
 	@py.test --cov=pendulum --cov-config .coveragerc tests/ -sq
 
-linux_release: wheels_x64 wheels_i686
+#linux_release: wheels_x64 wheels_i686 wheels_aarch64
 
-release: wheels_x64 wheels_i686 wheel
+linux_release: wheels_aarch64
+
+release: wheels_x64 wheels_i686 wheel wheels_aarch64
 
 publish:
 	@poetry publish --no-build
@@ -40,6 +42,8 @@ wheels_x64: build_wheels_x64
 
 wheels_i686: build_wheels_i686
 
+wheels_aarch64: qemu-user-static build_wheels_aarch64
+
 build_wheels_x64:
 	docker pull quay.io/pypa/manylinux2014_x86_64
 	docker run --rm -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 /io/build-wheels.sh
@@ -47,6 +51,13 @@ build_wheels_x64:
 build_wheels_i686:
 	docker pull quay.io/pypa/manylinux2014_i686
 	docker run --rm -v `pwd`:/io quay.io/pypa/manylinux2014_i686 /io/build-wheels.sh
+
+qemu-user-static:
+	docker run --rm --privileged hypriot/qemu-register
+
+build_wheels_aarch64:
+	docker pull quay.io/pypa/manylinux2014_aarch64
+	docker run --rm -v `pwd`:/io quay.io/pypa/manylinux2014_aarch64 /io/build-wheels.sh
 
 # run tests against all supported python versions
 tox:
