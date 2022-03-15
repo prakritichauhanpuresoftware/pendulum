@@ -18,6 +18,7 @@ for PYBIN in /opt/python/cp3*/bin; do
   rm -rf build
   export PATH=${PYBIN}:$OLD_PATH
   if [ $(uname -m) == 'i686' ]; then
+    yum update
     curl -fsS -o rust-1.59.0-i686-unknown-linux-gnu.tar.gz https://static.rust-lang.org/dist/rust-1.59.0-i686-unknown-linux-gnu.tar.gz
     tar -xf rust-1.59.0-i686-unknown-linux-gnu.tar.gz && cd rust-1.59.0-i686-unknown-linux-gnu
     ./install.sh && cd ../
