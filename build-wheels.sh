@@ -3,6 +3,7 @@ set -e -x
 
 cd $(dirname $0)
 
+uname -m
 curl -fsS -o install-poetry.py https://raw.githubusercontent.com/sdispater/poetry/master/install-poetry.py
 #rm get-poetry.py
 export OLD_PATH=$PATH
@@ -25,4 +26,5 @@ cd dist
 for whl in *.whl; do
     auditwheel repair "$whl"
     rm "$whl"
+    ls -l "$whl"
 done
