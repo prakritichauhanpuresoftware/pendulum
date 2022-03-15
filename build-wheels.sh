@@ -16,8 +16,7 @@ for PYBIN in /opt/python/cp3*/bin; do
   fi
   rm -rf build
   export PATH=${PYBIN}:$OLD_PATH
-  ${PYBIN}/python install-poetry.py --preview -y
-  export PATH=/root/.local/bin:$PATH
+  POETRY_HOME=${PYBIN} ${PYBIN}/python install-poetry.py --preview -y
   poetry build -vvv
 done
 
