@@ -26,5 +26,5 @@ cd dist
 for whl in *.whl; do
     auditwheel repair "$whl"
     rm "$whl"
-    ls -l
+    ls -l wheelhouse/
 done
