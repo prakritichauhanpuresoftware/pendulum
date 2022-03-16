@@ -23,7 +23,9 @@ setup: setup-python
 test:
 	@py.test --cov=pendulum --cov-config .coveragerc tests/ -sq
 
-linux_release: wheels_x64 wheels_i686 wheels_aarch64
+#linux_release: wheels_x64 wheels_i686 wheels_aarch64
+
+linux_release: wheels_i686
 
 release: wheels_x64 wheels_i686 wheel wheels_aarch64
 
