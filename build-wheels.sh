@@ -13,7 +13,7 @@ if [ $(uname -m) == 'i686' ]; then
     tar -xzf openssl-1.1.1k.tar.gz && cd openssl-1.1.1k
     ./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib no-shared zlib-dynamic
     make && make install && cd ../
-  fi
+ fi
 #rm get-poetry.py
 export OLD_PATH=$PATH
 
