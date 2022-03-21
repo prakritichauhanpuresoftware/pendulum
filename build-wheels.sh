@@ -29,6 +29,9 @@ for PYBIN in /opt/python/cp3*/bin; do
   if [ "$PYBIN" == "/opt/python/cp35-cp35m/bin" ]; then
     continue
   fi
+  if [ "$PYBIN" == "/opt/python/cp36-cp36m/bin" ]; then
+    continue
+  fi
   rm -rf build
   export PATH=${PYBIN}:$OLD_PATH
   POETRY_HOME=${PYBIN} ${PYBIN}/python install-poetry.py --preview -y
